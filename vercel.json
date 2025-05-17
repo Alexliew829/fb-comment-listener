@@ -1,0 +1,10 @@
+
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/trigger_test",
+      "destination": "/trigger_test_with_postid_debug.html"
+    }
+  ]
+}

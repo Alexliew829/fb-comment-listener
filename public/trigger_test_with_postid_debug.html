@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>测试 Facebook Listener 触发器</title>
+</head>
+<body>
+  <h2>发送测试 JSON 到 Vercel trigger 接口</h2>
+  <button onclick="send()">点击发送测试留言</button>
+  <p id="result">尚未发送…</p>
+
+  <script>
+    async function send() {
+      document.getElementById("result").innerText = "发送中…";
+
+      const response = await fetch("/api/trigger", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from_id: "101411206173416",
+          message: "Close",
+          post_id: "1234567890123456"
+        })
+      });
+
+      try {
+        const result = await response.json();
+        document.getElementById("result").innerText =
+          `✅ 状态码: ${response.status}\n返回内容: ${JSON.stringify(result)}`;
+      } catch (e) {
+        document.getElementById("result").innerText =
+          `❌ 返回非 JSON 格式\n状态码: ${response.status}`;
+      }
+    }
+  </script>
+</body>
+</html>
